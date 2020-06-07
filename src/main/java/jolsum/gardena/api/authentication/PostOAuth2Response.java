@@ -1,4 +1,4 @@
-package jolsum.gardena.model;
+package jolsum.gardena.api.authentication;
 
 public class PostOAuth2Response {
 

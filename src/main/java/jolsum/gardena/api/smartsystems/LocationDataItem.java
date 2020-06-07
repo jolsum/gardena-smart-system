@@ -1,4 +1,4 @@
-package jolsum.gardena.model;
+package jolsum.gardena.api.smartsystems;
 
 import java.util.Map;
 

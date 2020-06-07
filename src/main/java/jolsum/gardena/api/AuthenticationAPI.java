@@ -9,7 +9,7 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import jolsum.gardena.model.PostOAuth2Response;
+import jolsum.gardena.api.authentication.PostOAuth2Response;
 
 public class AuthenticationAPI {
 
