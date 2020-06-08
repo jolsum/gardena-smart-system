@@ -37,6 +37,26 @@ import org.java_websocket.handshake.ServerHandshake;
 
 public class SmartSystemsAPI {
 
+  private static final Gson GSON;
+
+  static {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+
+    GSON =
+        new GsonBuilder()
+            .registerTypeAdapter(
+                Instant.class,
+                new JsonDeserializer<Instant>() {
+
+                  @Override
+                  public Instant deserialize(
+                      JsonElement json, Type typeOfT, JsonDeserializationContext context) {
+                    return formatter.parse(json.getAsString(), Instant::from);
+                  }
+                })
+            .create();
+  }
+
   private final String appKey;
   private final PostOAuth2Response token;
 
@@ -97,7 +117,6 @@ public class SmartSystemsAPI {
       throw new IllegalArgumentException("URL is incorrect", e);
     }
 
-    final Gson gson = new Gson();
     final CountDownLatch latch = new CountDownLatch(1);
 
     WebSocketClient client =
@@ -110,7 +129,7 @@ public class SmartSystemsAPI {
 
           @Override
           public void onMessage(String message) {
-            observer.onMessage(convert(gson, message));
+            observer.onMessage(convert(message));
           }
 
           @Override
@@ -141,27 +160,7 @@ public class SmartSystemsAPI {
     }
   }
 
-  private static final Gson GSON;
-
-  static {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-
-    GSON =
-        new GsonBuilder()
-            .registerTypeAdapter(
-                Instant.class,
-                new JsonDeserializer<Instant>() {
-
-                  @Override
-                  public Instant deserialize(
-                      JsonElement json, Type typeOfT, JsonDeserializationContext context) {
-                    return formatter.parse(json.getAsString(), Instant::from);
-                  }
-                })
-            .create();
-  }
-
-  static DataItem convert(Gson gson, String message) {
+  static DataItem convert(String message) {
     DataItem obj = GSON.fromJson(message, DataItem.class);
 
     switch (obj.getType()) {

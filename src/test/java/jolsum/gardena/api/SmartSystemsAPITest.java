@@ -2,7 +2,6 @@ package jolsum.gardena.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.google.gson.Gson;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,10 +22,8 @@ public class SmartSystemsAPITest {
 
     Path path = Paths.get(getClass().getResource("/data_item_list.json").toURI());
 
-    Gson gson = new Gson();
-
     List<DataItem> dataItems =
-        Files.lines(path).map(l -> SmartSystemsAPI.convert(gson, l)).collect(Collectors.toList());
+        Files.lines(path).map(l -> SmartSystemsAPI.convert(l)).collect(Collectors.toList());
 
     LocationDataItem location = (LocationDataItem) dataItems.get(0);
     assertEquals("2a0717f0-ea50-4e9c-b40f-bdcbb60c0407", location.getId());
