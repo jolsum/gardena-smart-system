@@ -1,10 +1,9 @@
 package jolsum.gardena.api.smartsystems;
 
-public class WebSocketDataItem {
+public class DataItem {
 
   private String id;
   private String type;
-  private WebSocket attributes;
 
   public String getId() {
     return id;
@@ -14,7 +13,8 @@ public class WebSocketDataItem {
     return type;
   }
 
-  public WebSocket getWebSocket() {
-    return attributes;
+  @Override
+  public String toString() {
+    return getClass().getSimpleName() + " {id:" + id + ", type: " + type + "}";
   }
 }

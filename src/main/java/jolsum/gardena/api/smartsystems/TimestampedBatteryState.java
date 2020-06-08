@@ -4,10 +4,10 @@ import java.time.Instant;
 
 public class TimestampedBatteryState {
 
-  private String value;
+  private BatteryState value;
   private Instant timestamp;
 
-  public String getValue() {
+  public BatteryState getValue() {
     return value;
   }
 

@@ -31,9 +31,9 @@ public class WebSocketCreatedResponseTest {
     assertEquals("ost", dataItem.getId());
     assertEquals("WEBSOCKET", dataItem.getType());
 
-    WebSocket attributes = dataItem.getAttributes();
-    assertNotNull(attributes);
-    assertEquals(10, attributes.getValidity());
-    assertEquals("wss://something", attributes.getUrl());
+    WebSocket socket = dataItem.getWebSocket();
+    assertNotNull(socket);
+    assertEquals(10, socket.getValidity());
+    assertEquals("wss://something", socket.getUrl());
   }
 }
