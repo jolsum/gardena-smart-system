@@ -36,7 +36,7 @@ SmartSystemsAPI(appKey, token) api = new SmartSystemsAPI(appKey, token);
 LocationsResponse locations = api.getLocations();
 ```
 
-The smart systems api offers a websocket-method that initially pushes the current state and then continues to push updates as they happen. The call to `getWebSocketData` will block untill the thread is interrupted or the connection is closed.
+The smart systems api offers pushing data over a websocket. Initially the current state of all devices in transferred, and then it continues to push updates as they happen. Provide a response observer to the method to handle the incoming data.
 ```
 api.getWebSocketData(
     locationId,
@@ -59,3 +59,4 @@ api.getWebSocketData(
       }
     });
 ```
+The call to `getWebSocketData` will block untill the thread is interrupted or the connection is closed.
