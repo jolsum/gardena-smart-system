@@ -13,6 +13,9 @@ import jolsum.gardena.api.smartsystems.DataItem;
 import jolsum.gardena.api.smartsystems.DeviceDataItem;
 import jolsum.gardena.api.smartsystems.LocationDataItem;
 import jolsum.gardena.api.smartsystems.SensorDataItem;
+import jolsum.gardena.api.smartsystems.ValveActivity;
+import jolsum.gardena.api.smartsystems.ValveError;
+import jolsum.gardena.api.smartsystems.ValveServiceDataItem;
 import org.junit.jupiter.api.Test;
 
 public class SmartSystemsAPITest {
@@ -63,6 +66,14 @@ public class SmartSystemsAPITest {
     assertEquals("00022824", common1.getSerial());
     assertEquals("GARDENA smart Sensor", common1.getModelType());
     assertEquals("ONLINE", common1.getRfLinkState());
+
+    ValveServiceDataItem valve = (ValveServiceDataItem) dataItems.get(6);
+    assertEquals("9a79580d-4f12-44d4-84cb-c7c08bff983c", valve.getId());
+    assertEquals("VALVE", valve.getType());
+    assertEquals("9a79580d-4f12-44d4-84cb-c7c08bff983c", valve.getDevice().getId());
+    assertEquals("Kontroller", valve.getName());
+    assertEquals(ValveActivity.CLOSED, valve.getActivity().getValue());
+    assertEquals(ValveError.NO_MESSAGE, valve.getLastErrorCode().getValue());
 
     dataItems.forEach(System.out::println);
   }

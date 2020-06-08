@@ -30,6 +30,7 @@ import jolsum.gardena.api.smartsystems.DeviceDataItem;
 import jolsum.gardena.api.smartsystems.LocationDataItem;
 import jolsum.gardena.api.smartsystems.LocationsResponse;
 import jolsum.gardena.api.smartsystems.SensorDataItem;
+import jolsum.gardena.api.smartsystems.ValveServiceDataItem;
 import jolsum.gardena.api.smartsystems.WebSocketCreatedResponse;
 import jolsum.gardena.api.smartsystems.WebSocketResponseObserver;
 import org.java_websocket.client.WebSocketClient;
@@ -175,6 +176,9 @@ public class SmartSystemsAPI {
 
       case "COMMON":
         return GSON.fromJson(message, CommonServiceDataItem.class);
+
+      case "VALVE":
+        return GSON.fromJson(message, ValveServiceDataItem.class);
 
       default:
         return obj;
