@@ -32,7 +32,7 @@ PostOAuth2Response token = new AuthenticationAPI().getToken(appKey, username, pa
 
 Then use this token to load data from the GARDENA smart systems API:
 ```
-SmartSystemsAPI(appKey, token) api = new SmartSystemsAPI(appKey, token);
+SmartSystemsAPI api = new SmartSystemsAPI(appKey, token);
 LocationsResponse locations = api.getLocations();
 ```
 
